@@ -52,4 +52,17 @@ Logistic Regression provides better flexibility through threshold adjustment, al
 
 ---
 
-## 📁 Project Structure
+## 📁 Project Structure:
+
+
+spam-classifier-ml/
+├── notebooks/
+│   └── spam_classifier.ipynb
+├── src/
+│   ├── train.py
+│   ├── evaluate.py
+│   └── utils.py
+├── models/
+├── requirements.txt
+├── README.md
+└── .gitignore
