@@ -18,30 +18,30 @@ def main(models_dir: str, test_size: float, random_state: int):
     X_text = df["message"]
     y = df["label"]
 
-    # split درست: stratify برای حفظ نسبت کلاس‌ها
+    
     X_train_text, X_test_text, y_train, y_test = train_test_split(
         X_text, y, test_size=test_size, random_state=random_state, stratify=y
     )
 
-    # TF-IDF فقط روی train fit می‌شود (جلوگیری از data leakage)
+    
     vectorizer = TfidfVectorizer(stop_words="english")
     X_train = vectorizer.fit_transform(X_train_text)
     X_test = vectorizer.transform(X_test_text)
 
-    # Train NB
+    
     nb = MultinomialNB()
     nb.fit(X_train, y_train)
 
-    # Train Logistic Regression
+    
     lr = LogisticRegression(max_iter=2000)
     lr.fit(X_train, y_train)
 
-    # ذخیره‌ها
+    
     joblib.dump(vectorizer, f"{models_dir}/vectorizer.joblib")
     joblib.dump(nb, f"{models_dir}/nb_model.joblib")
     joblib.dump(lr, f"{models_dir}/lr_model.joblib")
 
-    # برای اینکه evaluate.py همون split رو داشته باشه، test-set رو هم ذخیره می‌کنیم
+    
     joblib.dump((X_test_text, y_test), f"{models_dir}/test_set.joblib")
 
     print("Saved:")

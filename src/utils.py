@@ -14,7 +14,7 @@ def load_sms_spam_from_url(url: str = DATA_URL) -> pd.DataFrame:
         with z.open("SMSSpamCollection") as f:
             df = pd.read_csv(f, sep="\t", header=None, names=["label", "message"])
 
-    # پاکسازی ساده
+    
     df["label"] = df["label"].astype(str).str.strip()
     df["message"] = df["message"].astype(str)
 
